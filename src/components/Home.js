@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import fire from "../config/fire";
+import HeaderHome from "./HeaderHome";
+import Note from "./Note";
+import NoteForm from "./NoteForm";
 
 class Home extends Component {
     constructor(props) {
@@ -10,60 +13,60 @@ class Home extends Component {
     logOut() {
         fire.auth().signOut();
     }
-    componentDidMount() {
-        var user = fire.auth().currentUser;
-        var name, email, photoUrl, uid, emailVerified;
-        if (user != null) {
-            name = user.displayName;
-            email = user.email;
-            photoUrl = user.photoURL;
-            emailVerified = user.emailVerified;
-            uid = user.uid;
-        }
+    llenarDatos() {
+        return (
+            <div className="container">
+                <form className="datos">
+                    <div className="row">
+                        <div className="col">
+                            <label htmlFor="exampleInputEmail1">
+                                First Name
+                            </label>
+                            <input
+                                type="text"
+                                name="nombre"
+                                className="form-control"
+                                // placeholder="First name"
+                            />
+                        </div>
+                        <div className="col">
+                            <label htmlFor="exampleInputEmail1">
+                                Last Name
+                            </label>
+                            <input
+                                type="text"
+                                name="apelllido"
+                                className="form-control"
+                                // placeholder="Last name"
+                            />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        );
     }
 
-    // <form className="datos">
-    //                 <div className="row">
-    //                     <div className="col">
-    //                         <label htmlFor="exampleInputEmail1">
-    //                             First Name
-    //                         </label>
-    //                         <input
-    //                             type="text"
-    //                             name="nombre"
-    //                             className="form-control"
-    //                             // placeholder="First name"
-    //                         />
-    //                     </div>
-    //                     <div className="col">
-    //                         <label htmlFor="exampleInputEmail1">
-    //                             Last Name
-    //                         </label>
-    //                         <input
-    //                             type="text"
-    //                             name="apelllido"
-    //                             className="form-control"
-    //                             // placeholder="Last name"
-    //                         />
-    //                     </div>
-    //                 </div>
-    //             </form>
-
     render() {
-        var user = fire.auth().currentUser;
-        if (user != null) {
-            user.providerData.forEach(function(profile) {
-                console.log("Sign-in provider: " + profile.providerId);
-                console.log("  Provider-specific UID: " + profile.uid);
-                console.log("  Name: " + profile.displayName);
-                console.log("  Email: " + profile.email);
-                console.log("  Photo URL: " + profile.photoURL);
-            });
-        }
+        const user = fire.auth().currentUser;
         return (
-            <div className="card">
-                <h3>You are Logged in!!</h3>
-                <button onClick={this.logOut}>Log Out</button>
+            <div className="container_app" id="container_home">
+                <HeaderHome>
+                    <button
+                        onClick={this.logOut}
+                        type="button"
+                        className="btn btn-secondary"
+                    >
+                        Log Out
+                    </button>
+                </HeaderHome>
+                {user.displayName === null ? this.llenarDatos() : null}
+                <NoteForm />
+                <div className="container" id="container_notes">
+                    <Note />
+                    <Note />
+                    <Note />
+                    {console.log(fire.auth().currentUser)}
+                </div>
             </div>
         );
     }

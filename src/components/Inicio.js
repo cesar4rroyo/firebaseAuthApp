@@ -57,11 +57,7 @@ const Inicio = ({ history }) => {
                             autoComplete="off"
                         />
                     </div>
-                    <button
-                        to="/home"
-                        type="submit"
-                        className="btn btn-success"
-                    >
+                    <button type="submit" className="btn btn-success">
                         Login
                     </button>
                     <Link to="/signup" className="btn btn-primary ml-2">
