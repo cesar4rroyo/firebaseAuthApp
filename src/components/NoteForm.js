@@ -2,26 +2,26 @@ import React, { Component } from "react";
 import "../App.css";
 
 class NoteForm extends Component {
-    // constructor() {
-    //     super();
-    //     this.addNote = this.addNote.bind(this);
-    // }
+    constructor() {
+        super();
+        this.addNote = this.addNote.bind(this);
+    }
 
-    // addNote() {
-    //     console.log(this.textInput.value);
-    //     this.props.addNote(this.textInput.value);
-    //     this.textInput.value = "";
-    //     this.textInput.focus();
-    // }
+    addNote() {
+        console.log(this.textInput.value);
+        this.props.addNote(this.textInput.value);
+        this.textInput.value = "";
+        this.textInput.focus();
+    }
 
     render() {
         return (
             <div className="container" id="container_form">
                 <div className="input-group input-group-lg">
                     <textarea
-                        // ref={input => {
-                        //     this.textInput = input;
-                        // }}
+                        ref={input => {
+                            this.textInput = input;
+                        }}
                         type="text"
                         className="form-control"
                         placeholder="What do you think today?..."
@@ -31,7 +31,7 @@ class NoteForm extends Component {
                     <button
                         type="button"
                         className="btn btn-success"
-                        // onClick={this.addNote}
+                        onClick={this.addNote}
                     >
                         Add Note
                     </button>
